@@ -1,7 +1,7 @@
 from socket import gethostname
 from django.views.generic.base import TemplateView
 from .models import OrdersModel
-from ocDjangoDemo.settings import ENABLE_POSTGRES
+from TBDjangoDemo.settings import ENABLE_POSTGRES
 
 class IndexView(TemplateView):
     template_name = "index.html"
