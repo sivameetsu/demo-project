@@ -1,0 +1,209 @@
+@font-face {
+    font-family: 'Roboto';
+    src: url('Roboto-Bold-webfont.woff');
+    font-weight: 700;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Roboto';
+    src: url('Roboto-Regular-webfont.woff');
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Roboto';
+    src: url('Roboto-Light-webfont.woff');
+    font-weight: 300;
+    font-style: normal;
+}
+
+body, main {
+    margin: 0 auto;
+}
+
+html {
+    line-height: 1.15;
+    -ms-text-size-adjust: 100%;
+    -webkit-text-size-adjust: 100%;
+    box-sizing: border-box;
+}
+
+footer, header, main {
+    display: block;
+}
+
+a {
+    background-color: transparent;
+    -webkit-text-decoration-skip: objects;
+    color: #19865C;
+    text-decoration: none;
+}
+
+img {
+    border-style: none;
+}
+
+header {
+    border-bottom: 1px solid #efefef;
+}
+
+body {
+    max-width: 960px;
+    color: #525252;
+    font-family: Roboto, sans-serif;
+}
+
+main {
+    text-align: center;
+}
+
+.u-clearfix:after {
+    content: "";
+    clear: both;
+    display: table;
+}
+
+h1, h2, h3, h4, h5, p, ul {
+    padding: 0;
+    margin: 0;
+    font-weight: 400;
+}
+
+header {
+    padding-top: 20px;
+    padding-bottom: 10px;
+}
+
+.logo-django {
+    float: left;
+}
+
+.logo-django img {
+    width: 150px;
+}
+
+.logo-tradebyte {
+    float: right;
+}
+
+.logo-tradebyte img {
+    width: 150px;
+}
+
+h2 {
+    font-size: 22px;
+    max-width: 500px;
+    margin: 5px auto 0;
+}
+
+main p {
+    font-size: 16px;
+    line-height: 20px;
+    max-width: 390px;
+    margin: 15px auto 0;
+    color: #888888;
+}
+
+footer {
+    padding: 25px 0;
+    position: fixed;
+    left: 50%;
+    bottom: 0;
+    width: 960px;
+    -webkit-transform: translateX(-50%);
+    transform: translateX(-50%);
+    -webkit-transform-style: preserve-3d;
+    transform-style: preserve-3d;
+    border-top: 1px solid #efefef;
+}
+
+@media (max-width: 996px) {
+    body, footer {
+        max-width: 780px;
+    }
+}
+
+@media (max-width: 800px) {
+    footer, main {
+        position: relative;
+    }
+
+    footer {
+        height: 100%;
+    }
+
+    main {
+        padding: 0 25px;
+    }
+
+    main h2 {
+        font-size: 18px;
+    }
+
+    main p {
+        font-size: 14px;
+    }
+
+    header {
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+
+    footer {
+        overflow: hidden;
+        width: 100%;
+        margin-top: 50px;
+    }
+}
+
+@media (min-width: 801px) and (max-height: 600px) {
+    footer {
+        position: relative;
+        margin: 135px auto 0;
+    }
+}
+
+
+table {
+    border: 1px solid #1C6EA4;
+    background-color: #EEEEEE;
+    width: 100%;
+    text-align: left;
+    border-collapse: collapse;
+    margin-top: 5px;
+}
+
+table td, table th {
+    border: 1px solid #AAAAAA;
+    padding: 3px 2px;
+}
+
+table tbody td {
+    font-size: 14px;
+}
+
+table tr:nth-child(even) {
+    background: #D0E4F5;
+}
+
+table thead {
+    background: #1C6EA4;
+    background: -moz-linear-gradient(top, #5592bb 0%, #327cad 66%, #1C6EA4 100%);
+    background: -webkit-linear-gradient(top, #5592bb 0%, #327cad 66%, #1C6EA4 100%);
+    background: linear-gradient(to bottom, #5592bb 0%, #327cad 66%, #1C6EA4 100%);
+    border-bottom: 2px solid #444444;
+}
+
+table thead th {
+    font-size: 18px;
+    font-weight: bold;
+    color: #FFFFFF;
+    text-align: center;
+    border-left: 2px solid #D0E4F5;
+}
+
+table thead th:first-child {
+    border-left: none;
+}

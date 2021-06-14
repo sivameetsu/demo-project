@@ -1,0 +1,64 @@
+<!doctype html>
+
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Tradebyte Django Demo</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="/static/style.css">
+    <style type="text/css">
+
+    </style>
+</head>
+<body>
+<header class="u-clearfix">
+    <div class="logo-django">
+        <a href="https://www.djangoproject.com/" target="_blank" rel="noopener">
+            <img src="static/python-django.png" width="150px"/>
+        </a>
+    </div>
+    <div class="logo-tradebyte">
+        <a href="https://www.tradebyte.com" target="_blank" rel="noopener">
+            <img src="static/tradebyte-logo.png" width="150px"/>
+        </a>
+    </div>
+</header>
+<main>
+    <h2>This is a Tradebyte Sample Django App.</h2>
+    <h3>Hostname: <b>{{ hostname }}</b></h3>
+    <hr>
+    <h3>This application is running on: </h3>
+    {% if enable_postgres %}
+        <img src="static/postgresql-logo.png" alt="PostgreSQL">
+    {% else %}
+        <img src="static/sqlite-logo.png" alt="SQLite">
+    {% endif %}
+    <hr>
+
+    <div>
+    <h4>Extracting some sample data from database:</h4>
+        <table>
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Item</th>
+                <th>Count</th>
+            </tr>
+            </thead>
+            {% for order in orders_list %}
+                <tr>
+                    <td>{{ order.id }}</td>
+                    <td>{{ order.name }}</td>
+                    <td>{{ order.item }}</td>
+                    <td>{{ order.count }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+</main>
+<footer class="u-clearfix">
+    <p>T.B.</p>
+</footer>
+</body>
+</html>
