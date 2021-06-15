@@ -1,7 +1,7 @@
 from socket import gethostname
 from django.views.generic.base import TemplateView
 from .models import OrdersModel
-from TBDjangoDemo.settings import ENABLE_POSTGRES
+from TBDjangoDemo.settings import ENABLE_POSTGRES, ENABLE_MYSQL
 
 class IndexView(TemplateView):
     template_name = "index.html"
@@ -12,6 +12,7 @@ class IndexView(TemplateView):
         orders_list = OrdersModel.objects.all()
         context['orders_list'] = orders_list
         context['enable_postgres'] = ENABLE_POSTGRES
+        context['enable_mysql'] = ENABLE_MYSQL
         context['hostname'] = gethostname()
 
         return context

@@ -77,15 +77,9 @@ WSGI_APPLICATION = 'TBDjangoDemo.wsgi.application'
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
 ENABLE_POSTGRES = os.getenv('ENABLE_POSTGRES', False)
+ENABLE_MYSQL = os.getenv('ENABLE_MYSQL', False)
 
-if not ENABLE_POSTGRES:
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.sqlite3',
-            'NAME': BASE_DIR / 'db.sqlite3',
-        }
-    }
-else:
+if ENABLE_POSTGRES:
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.postgresql',
@@ -96,6 +90,25 @@ else:
             'PORT': os.environ['POSTGRES_PORT'],
         }
     }
+elif ENABLE_MYSQL:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.mysql',
+            'NAME': os.environ['MYSQL_DB'],
+            'USER': os.environ['MYSQL_USER'],
+            'PASSWORD': os.environ['MYSQL_PASSWORD'],
+            'HOST': os.environ['MYSQL_HOST'],
+            'PORT': os.environ['MYSQL_PORT'],
+        }
+    }
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
+        }
+    }
+
 
 
 # Password validation

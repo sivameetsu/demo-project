@@ -1,0 +1,29 @@
+version: '3'
+
+services:
+  mysql:
+    image: mysql:5.7
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_USER: tradebyte
+      MYSQL_PASSWORD: tradebyte
+      MYSQL_DATABASE: tradebyte
+      MYSQL_RANDOM_ROOT_PASSWORD: "yes"
+
+  web:
+    build:
+      context: .
+    environment:
+      ENABLE_MYSQL: 1
+      MYSQL_DB: tradebyte
+      MYSQL_USER: tradebyte
+      MYSQL_PASSWORD: tradebyte
+      MYSQL_HOST: mysql
+      MYSQL_PORT: 3306
+    ports:
+      - "8000:8000"
+    command: ["sh", "-c", "./wait-for-it.sh mysql:3306 -- echo up && python3 manage.py migrate && python3 manage.py runserver 0.0.0.0:8000"
+              ]
+    depends_on:
+      - mysql

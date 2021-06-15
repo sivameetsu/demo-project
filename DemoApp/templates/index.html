@@ -30,6 +30,8 @@
     <h3>This application is running on: </h3>
     {% if enable_postgres %}
         <img src="static/postgresql-logo.png" alt="PostgreSQL">
+    {% elif enable_mysql %}
+        <img src="static/mysql-logo.png" alt="MySQL">
     {% else %}
         <img src="static/sqlite-logo.png" alt="SQLite">
     {% endif %}
