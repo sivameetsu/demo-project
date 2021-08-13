@@ -12,7 +12,6 @@ In order to run the application using PostgreSQL, run the following command:
 ```console
 $ docker-compose -f docker-compose-pgsql.yml up
 ```
-
 ### Docker-compose MySQL
 In order to run the application using MySQL, run the following command: 
 ```console
