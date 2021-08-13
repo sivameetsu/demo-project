@@ -11,7 +11,7 @@ on:
 jobs:
   staging:
     if: ${{ github.ref == 'refs/heads/develop' }}
-    name: Build
+    name: staging
     runs-on: ubuntu-latest
     steps:
 
