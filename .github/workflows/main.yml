@@ -14,9 +14,7 @@ jobs:
     name: Build
     runs-on: ubuntu-latest
     steps:
-      - name: Print a greeting
-        env:
-          ID: ${{env.GITHUB_RUN_NUMBER}}
+
       - name: checkout
         uses: actions/checkout@v1
         
@@ -38,6 +36,8 @@ jobs:
           context: .
           push: true
           tags: jjino/svc:$ID
+        env:
+          ID: ${{env.GITHUB_RUN_NUMBER}}
           
       - name: executing remote ssh commands using password
         uses: appleboy/ssh-action@master
@@ -46,6 +46,8 @@ jobs:
           username: ${{ secrets.USERNAME }}
           key: ${{ secrets.KEY }}
           port: ${{ secrets.PORT }}
+        env:
+          ID: ${{env.GITHUB_RUN_NUMBER}}
           script: |
             IMAGE=svc:$ID
             DOCKER_HUB=jjino
