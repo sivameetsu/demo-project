@@ -23,7 +23,7 @@ jobs:
         with:
           context: .
           push: true
-          tags: jjino/svc:${{ env.GITHUB_RUN_NUMBER }}
+          tags: jjino/svc:10
           
       - name: executing remote ssh commands using password
         uses: appleboy/ssh-action@master
@@ -33,7 +33,7 @@ jobs:
           key: ${{ secrets.KEY }}
           port: ${{ secrets.PORT }}
           script: |
-            IMAGE=svc:${{ env.GITHUB_RUN_NUMBER }}
-            DOCKER_HUB=${{ secrets.DOCKERHUB_USERNAME }}
+            IMAGE=svc:10
+            DOCKER_HUB=jjino
             sed -i 's/containerImageName/'"$DOCKER_HUB\/$IMAGE"'/g' st-dp.yml
             bash staging.sh
