@@ -1,0 +1,89 @@
+name: remote ssh command
+on:
+  push:
+    branches: 
+      - master
+      - develop
+  pull_request:
+    branches: 
+      - master
+      - develop
+jobs:
+  staging:
+    if: ${{ github.ref == 'refs/heads/develop' }}
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v1
+        
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v1
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
+ 
+      - name: Login to DockerHub
+        uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Build and push
+        uses: docker/build-push-action@v2
+        with:
+          context: .
+          push: true
+          tags: jjino/svc:10
+          
+      - name: executing remote ssh commands using password
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.KEY }}
+          port: ${{ secrets.PORT }}
+          script: |
+            IMAGE=svc:10
+            DOCKER_HUB=jjino
+            sed -i 's/containerImageName/'"$DOCKER_HUB\/$IMAGE"'/g' st-dp.yml
+            bash staging.sh
+  production:
+    if: ${{ github.ref == 'refs/heads/master' }}
+    name: Prod
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v1
+        
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v1
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
+ 
+      - name: Login to DockerHub
+        uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Build and push
+        uses: docker/build-push-action@v2
+        with:
+          context: .
+          push: true
+          tags: jjino/svc:10
+          
+      - name: executing remote ssh commands using password
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.KEY }}
+          port: ${{ secrets.PORT }}
+          script: |
+            IMAGE=svc:10
+            DOCKER_HUB=jjino
+            sed -i 's/containerImageName/'"$DOCKER_HUB\/$IMAGE"'/g' pd-dp.yml
+            bash production.sh
