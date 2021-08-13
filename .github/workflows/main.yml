@@ -14,6 +14,7 @@ jobs:
     name: Build
     runs-on: ubuntu-latest
     steps:
+
       - name: checkout
         uses: actions/checkout@v1
         
@@ -34,7 +35,9 @@ jobs:
         with:
           context: .
           push: true
-          tags: jjino/svc:10
+          tags: jjino/st:100
+        env:
+          ID: ${{env.GITHUB_RUN_NUMBER}}
           
       - name: executing remote ssh commands using password
         uses: appleboy/ssh-action@master
@@ -44,10 +47,11 @@ jobs:
           key: ${{ secrets.KEY }}
           port: ${{ secrets.PORT }}
           script: |
-            IMAGE=svc:10
+            IMAGE=st:100
             DOCKER_HUB=jjino
             sed -i 's/containerImageName/'"$DOCKER_HUB\/$IMAGE"'/g' st-dp.yml
             bash staging.sh
+  
   production:
     if: ${{ github.ref == 'refs/heads/master' }}
     name: Prod
@@ -73,7 +77,7 @@ jobs:
         with:
           context: .
           push: true
-          tags: jjino/svc:10
+          tags: jjino/pd:1000
           
       - name: executing remote ssh commands using password
         uses: appleboy/ssh-action@master
@@ -83,7 +87,7 @@ jobs:
           key: ${{ secrets.KEY }}
           port: ${{ secrets.PORT }}
           script: |
-            IMAGE=svc:10
+            IMAGE=pd:1000
             DOCKER_HUB=jjino
             sed -i 's/containerImageName/'"$DOCKER_HUB\/$IMAGE"'/g' pd-dp.yml
             bash production.sh
