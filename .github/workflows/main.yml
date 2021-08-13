@@ -54,6 +54,8 @@ jobs:
   
   production:
     if: ${{ github.ref == 'refs/heads/master' }}
+    environment:
+      name: Prod
     name: Prod
     runs-on: ubuntu-latest
     steps:
