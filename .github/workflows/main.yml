@@ -35,7 +35,7 @@ jobs:
         with:
           context: .
           push: true
-          tags: jjino/svc:$ID
+          tags: jjino/st:100
         env:
           ID: ${{env.GITHUB_RUN_NUMBER}}
           
@@ -46,10 +46,8 @@ jobs:
           username: ${{ secrets.USERNAME }}
           key: ${{ secrets.KEY }}
           port: ${{ secrets.PORT }}
-        env:
-          ID: ${{env.GITHUB_RUN_NUMBER}}
           script: |
-            IMAGE=svc:$ID
+            IMAGE=st:100
             DOCKER_HUB=jjino
             sed -i 's/containerImageName/'"$DOCKER_HUB\/$IMAGE"'/g' st-dp.yml
             bash staging.sh
@@ -79,7 +77,7 @@ jobs:
         with:
           context: .
           push: true
-          tags: jjino/svc:10
+          tags: jjino/pd:1000
           
       - name: executing remote ssh commands using password
         uses: appleboy/ssh-action@master
@@ -89,7 +87,7 @@ jobs:
           key: ${{ secrets.KEY }}
           port: ${{ secrets.PORT }}
           script: |
-            IMAGE=svc:10
+            IMAGE=pd:1000
             DOCKER_HUB=jjino
             sed -i 's/containerImageName/'"$DOCKER_HUB\/$IMAGE"'/g' pd-dp.yml
             bash production.sh
