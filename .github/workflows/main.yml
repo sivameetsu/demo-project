@@ -1,7 +1,14 @@
 name: remote ssh command
-on: [push]
+on:
+  push:
+    branches: 
+      - master
+      - develop
+  pull_request:
+    branches: 
+      - master
+      - develop
 jobs:
-
   build:
     name: Build
     runs-on: ubuntu-latest
