@@ -21,9 +21,9 @@ jobs:
       - name: Build and push
         uses: docker/build-push-action@v2
         with:
-          context: node-app/
+          context: .
           push: true
-          tags: jjino/node-app:11
+          tags: jjino/svc:${{ GITHUB_RUN_NUMBER }}
           
       - name: executing remote ssh commands using password
         uses: appleboy/ssh-action@master
