@@ -14,6 +14,9 @@ jobs:
     name: Build
     runs-on: ubuntu-latest
     steps:
+      - name: Print a greeting
+        env:
+          ID: ${{env.GITHUB_RUN_NUMBER}}
       - name: checkout
         uses: actions/checkout@v1
         
@@ -34,7 +37,7 @@ jobs:
         with:
           context: .
           push: true
-          tags: jjino/svc:${{ env.GITHUB_RUN_NUMBER }}
+          tags: jjino/svc:$ID
           
       - name: executing remote ssh commands using password
         uses: appleboy/ssh-action@master
@@ -44,7 +47,7 @@ jobs:
           key: ${{ secrets.KEY }}
           port: ${{ secrets.PORT }}
           script: |
-            IMAGE=svc:${{ env.GITHUB_RUN_NUMBER }}
+            IMAGE=svc:$ID
             DOCKER_HUB=jjino
             sed -i 's/containerImageName/'"$DOCKER_HUB\/$IMAGE"'/g' st-dp.yml
             bash staging.sh
